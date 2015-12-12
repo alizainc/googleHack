@@ -1,0 +1,207 @@
+/* CSS declarations go here */
+.map-container {
+  width: 100%;
+  max-width: 100%;
+  height: 500px;
+}
+
+
+body {
+    font-family: times; 
+    margin: 0px;
+    background-color:#6d8383;
+}
+
+head {
+    background-color:#6d8383;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}
+
+.image{
+      width: 200px;
+      height: 200px;
+}
+
+.blah{
+    float:left;
+    display:inline-block;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    width: 25%;
+    height: 65px;
+    vertical-align:center;
+    text-align:center;
+    
+}
+
+.container-fluid{
+    vertical-align: center;
+    width: 900px;
+    height: 100%;
+    /*background-color:#eee;*/
+}
+
+.tboxes{
+    background: white;
+	border: 1px solid #DDD;
+	border-radius: 5px;
+	color: #666;
+	width: 165px;
+	outline: none;
+	vertical-align: center;
+	box-shadow: 0 0 5px #333;
+	
+}
+
+#address{
+    width: 250px;
+}
+
+.lay{
+    /*background-color:#6d8383;*/
+    width: 100%;
+    height: 100%;
+    vertical-align: center;
+}
+
+#here {
+    padding: 10px 15px;
+    background: #4479BA;
+    color: #FFF;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: solid 1px #20538D;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+#here:hover {
+    background: #356094;
+    border: solid 1px #2A4E77;
+    text-decoration: none;
+}
+#here:active {
+    -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    background: #2E5481;
+    border: solid 1px #203E5F;
+}
+
+#ips{
+    /*background-color:#6d8383;*/
+}
+
+.blah1{
+    padding: 20px;
+    text-align:center;
+}
+
+.suggestions{
+}
+
+.container2{
+    vertical-align:center;
+}
+
+#stormapp.html
+
+<head>
+  <title>stormapp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <!--<div class ="lay">{{> topnav }}</div>-->
+    <!--<div class="lay" align="center" id="ips">{{> helpme }}<br></div>-->
+    <!--<div class="lay">{{> map }}</div>-->
+    
+</body>
+
+<template name="topnav">
+  <nav id="header" class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="blah"><img src="logo1.png"></div>
+        <div class="blah"><a href="/">Home</a></div>
+        <div class="blah"><br><a href="/data">Data</a></div> 
+        <div class="blah"><br><a href="" id="weat">Weather</a></div>
+    </div>
+  </nav>
+  <div class="lay"  id="ips">{{> yield }}</div>
+</template>
+
+
+<template name="helpme">
+  <div class="container2" align="center">
+    <input type="text" id="name" placeholder="Your name" class="tboxes"/>
+    <input type="text" id="noofpeople" placeholder="Number of people" class="tboxes"/>
+    <input type="text" id="special" placeholder="Special Instructions" class="tboxes"/>
+    <input type="text" id="address" placeholder="Not required if location enabled" class="tboxes"/>
+    <input type="button" id="here" value="Help Me!"/>
+  </div>
+  <div class="lay">{{> map }}</div>
+</template>
+
+<template name="map">  
+  <div class="container1">
+    <div class="map-container">
+      {{> googleMap name="map" options=mapOptions}}
+    </div>
+  </div>
+</template>  
+
+<template name="Data">
+  {{> esAutosuggest index="markers" placeholder="Search for special circumstances" renderValue="autosuggestValues" renderSuggestion="suggestionTpl"}}
+  <div align="center">
+  <table id="mytab">
+    <tr>
+      <th class="blah1">Name</th>
+      <th class="blah1">No. of people</th>
+      <th class="blah1">Special</th>
+      <th class="blah1">Location</th>
+    </tr>
+  {{#each getmarkers}}
+  <tr>
+    <td class="blah1">{{name}}</td>
+    <td class="blah1">{{noofpeople}}</td>
+    <td class="blah1">{{special}}</td>
+    <td class="blah1">{{streetNumber}} {{streetName}} {{city}}, {{state}}, {{zipcode}}</td>
+  </tr>
+  {{/each}}
+  </table>
+  </div>
+</template>
+
+<template name="autosuggestValues">
+    <span class="markers" style="border: 1px solid black">
+      <a href="#" class="remove">X</a>
+        <span class="filter">{{value}}</span>
+    </span>
+</template>
+
+<template name="suggestionTpl">
+    <!-- Default way of ES rendering the suggestions -->
+    {{pre}}<span class="found">{{found}}</span>{{post}}
+    <!-- "doc" gives access to the suggested document -->
+<!--     {{doc.name}} -->
+</template>
+
+<template name="Weather">
+  <h1>This is weather.</h1>
+</template>
